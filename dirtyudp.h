@@ -14,7 +14,7 @@
 #include "oscpack/osc/OscOutboundPacketStream.h"
 #include "oscpack/osc/OscReceivedElements.h"
 #include "oscpack/osc/OscPrintReceivedElements.h"
-void error(char* message) {
+void error(const char* message) {
   perror(message);
   exit(0);
 }
@@ -24,12 +24,12 @@ class UdpSender {
     int port;
     int bufferSize;
     char* buffer;
-    char* host;
+    const char* host;
     struct sockaddr_in serverAddress;
     struct hostent* server;
     int broadcast = 1;
   public:
-    UdpSender(char* host, int port, int bufferSize) {
+    UdpSender(const char* host, int port, int bufferSize) {
       this->host = host;
       this->port = port;
       this->bufferSize = bufferSize;
