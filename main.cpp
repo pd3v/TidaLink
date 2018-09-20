@@ -28,6 +28,7 @@
 #include <chrono>
 #include <iostream>
 #include <thread>
+#include <signal.h>
 #if defined(LINK_PLATFORM_UNIX)
 #include <termios.h>
 #include <stdio.h>
@@ -35,6 +36,19 @@
 #include <unistd.h>
 #include <math.h>
 #endif
+
+
+// taken from https://stackoverflow.com/a/3911102
+extern "C" void my_function_to_handle_aborts(int signal_number)
+{
+    /*Your code goes here. You can output debugging info.
+      If you return from this function, and it was called
+      because abort() was called, your program will exit or crash anyway
+      (with a dialog box on Windows).
+     */
+  std::cout << "aborted with signal number " << signal_number << std::endl;
+  exit(1);
+}
 
 // #define NTP_UT_EPOCH_DIFF ((70 * 365 + 17) * 24 * 60 * 60)
 #define OUTPUT_BUFFER_SIZE 1024
@@ -309,6 +323,9 @@ void oscRecvThreadFunc(State& state) {
 
 int main(int, char**)
 {
+  /*Do this early in your program's initialization */
+  signal(SIGABRT, &my_function_to_handle_aborts);
+
   sender = new UdpSender("127.0.0.1", 6043, OUTPUT_BUFFER_SIZE);
   receiver = new UdpReceiver(6042, OUTPUT_BUFFER_SIZE);
   State state;
