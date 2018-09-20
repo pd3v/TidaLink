@@ -338,7 +338,7 @@ int main_udprcv(int argc, char** argv) {
   while(1) receiver->Loop(udpHandler, NULL);
 }
 char buffer [BUFFERSIZE];
-int main_udptx(int argc, char** argv) {
+void main_udptx(int argc, char** argv) {
   UdpSender* sender = new UdpSender("127.0.0.1", 7000, BUFFERSIZE);
   osc::OutboundPacketStream p(buffer, BUFFERSIZE);
   p << osc::BeginBundleImmediate
