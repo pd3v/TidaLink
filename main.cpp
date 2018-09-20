@@ -230,6 +230,10 @@ void input(State& state)
     case 't':
       state.quantum += 1;
       break;
+    default:
+      clearLine();
+      printHelp();
+      break;
   }
   state.link.commitAppTimeline(timeLine);
   input(state);
