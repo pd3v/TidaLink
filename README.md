@@ -4,7 +4,7 @@ Standalone server for automatically syncing [TidalCycles](http://tidalcycles.org
 Quoting from:
 http://lurk.org/r/post/7AM6Qt7DlvJtorbIuVLMFA
 
-You'll need 'cmake' as well as a c++ compiler etc. If you're on a mac,
+You'll need `cmake` as well as a c++ compiler etc. If you're on a mac,
 you will probably have to at least do this, which in turn requires
 homebrew (get it from https://brew.sh/ if you don't already have it):
 
